@@ -1,13 +1,27 @@
 {
   "name": "riteail",
   "private": false,
-  "version": "1.0.0",
+  "version": "3.0.0",
+  "description": "A React + Vite + TailwindCSS template for small projects with included mode toggle.",
+  "keywords": [
+    "react",
+    "vite",
+    "tailwind",
+    "template"
+  ],
+  "bin": {
+    "create-riteail": "bin/cli.js"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byEnok/riteail-template.git"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -29,7 +43,6 @@
     "tailwindcss": "^3.4.13",
     "vite": "^5.4.1"
   },
-  "keywords": ["react", "vite", "tailwind", "template"],
-  "description": "A React + Vite + TailwindCSS template for small projects with included mode toggle."
-  
+  "author": "byenok",
+  "license": "MIT"
 }
