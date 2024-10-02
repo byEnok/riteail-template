@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import { execSync } from 'child_process';
+import path from "path";
+import fs from "fs";
 
 const runCommand = command => {
   try {
@@ -13,25 +15,34 @@ const runCommand = command => {
 }
 
 const projectName = process.argv[2] || 'riteail-project';
-// Clone the template repository from GitHub
-// const gitCheckoutCommand = `git clone https://github.com/byEnok/riteail-template.git ${projectName}` 
-// Basic Dependencies install
-const installDepsCommand = `cd ${projectName} && npm install}`
+
+// Determine the target directory (current directory or a new one)
+const targetDir = projectName === '.' ? process.cwd() : path.join(process.cwd(), projectName);
+
+// Install dependencies
+const installDepsCommand = `cd ${targetDir} && npm install`
+
 // Remove the .git folder 
-const removeGitFolderCommand = `cd ${projectName} && rm -rf .git`;
+const removeGitFolderCommand = `cd ${targetDir} && rm -rf .git`;
 
 
+// Check if the folder already exists
+if (projectName !== "," && fs.existsSync(targetDir)) {
+  console.error(`Error: Directory ${targetDir} already exists. Please choose a different project name.`);
+  process.exit(1);
+}
 
-// Step 1: Clone the project
-// console.log(`Creating project: ${projectName}`);
-// const checkedOut = runCommand(gitCheckoutCommand)
-// if (!checkedOut) process.exit(-1) 
-
+// Create a new folder if projectName isn't "."
+if (projectName !== '.') {
+  fs.mkdirSync(targetDir);
+}
 
 // Step 2: Remove the .git folder so the new project has its own local git history
 console.log(`Removing .git history from the template`);
 runCommand(removeGitFolderCommand);
 // if (!removeGitFolderCommand) process.exit(-1)
+
+
 
 // Step 3: Install dependencies
 console.log(`Installing dependencies for ${projectName}`)

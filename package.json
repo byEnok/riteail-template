@@ -1,7 +1,7 @@
 {
   "name": "riteail",
   "private": false,
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A React + Vite + TailwindCSS template for small projects with included mode toggle.",
   "keywords": [
     "react",
